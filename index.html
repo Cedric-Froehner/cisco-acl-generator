@@ -1,0 +1,547 @@
+<head>
+	<style>
+		.ip-field{
+			width: 3rem;
+		}
+		.fixed-width-1{
+			min-width: 8rem;
+			display: inline-block;
+		}
+		.large {
+			width: 100%;
+			height: 100%;
+			text-align: top;
+		}
+	</style>
+	<script>
+		function validateIp(field) {
+			var value = parseInt(field.value);
+			if (value > 255 || value < 0 || isNaN(value)) {
+				field.value = "";
+				return
+			}
+		}
+		
+		function srcPortChange(field) {
+			if (field == "protoU") {
+				document.getElementById("srcProtoSelectU").disabled = false;
+				document.getElementById("srcProtoSelectT").disabled = true;
+				document.getElementById("srcProtoSelectT").value = "";
+				document.getElementById("srcPortNumberU").disabled = true;
+				document.getElementById("srcPortNumberU").value = "";
+				document.getElementById("srcPortNumberT").disabled = true;
+				document.getElementById("srcPortNumberT").value = "";
+				
+				document.getElementById("dstProtoRadioU").disabled = false;
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoRadioT").disabled = true;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortRadioU").disabled = false;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortRadioT").disabled = true;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+				document.getElementById("dstICMPRadio").disabled = true;
+				document.getElementById("dstAnyPortRadio").disabled = false;
+				document.getElementById("dstAnyPortRadio").checked = true;
+			}
+			else if (field == "protoT") {
+				document.getElementById("srcProtoSelectU").disabled = true;
+				document.getElementById("srcProtoSelectU").value = "";
+				document.getElementById("srcProtoSelectT").disabled = false;
+				document.getElementById("srcPortNumberU").disabled = true;
+				document.getElementById("srcPortNumberU").value = "";
+				document.getElementById("srcPortNumberT").disabled = true;
+				document.getElementById("srcPortNumberT").value = "";
+				
+				document.getElementById("dstProtoRadioU").disabled = true;
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoRadioT").disabled = false;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstPortRadioU").disabled = true;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortRadioT").disabled = false;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstICMPRadio").disabled = true;
+				document.getElementById("dstAnyPortRadio").disabled = false;
+				document.getElementById("dstAnyPortRadio").checked = true;
+				
+			}
+			else if (field == "portU") {
+				document.getElementById("srcProtoSelectU").disabled = true;
+				document.getElementById("srcProtoSelectU").value = "";
+				document.getElementById("srcProtoSelectT").disabled = true;
+				document.getElementById("srcProtoSelectT").value = "";
+				document.getElementById("srcPortNumberU").disabled = false;
+				document.getElementById("srcPortNumberT").disabled = true;
+				document.getElementById("srcPortNumberT").value = "";
+				
+				document.getElementById("dstProtoRadioU").disabled = false;
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoRadioT").disabled = true;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortRadioU").disabled = false;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortRadioT").disabled = true;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+				document.getElementById("dstICMPRadio").disabled = true;
+				document.getElementById("dstAnyPortRadio").disabled = false;
+				document.getElementById("dstAnyPortRadio").checked = true;
+			}
+			else if (field == "portT") {
+				document.getElementById("srcProtoSelectU").disabled = true;
+				document.getElementById("srcProtoSelectU").value = "";
+				document.getElementById("srcProtoSelectT").disabled = true;
+				document.getElementById("srcProtoSelectT").value = "";
+				document.getElementById("srcPortNumberU").disabled = true;
+				document.getElementById("srcPortNumberU").value = "";
+				document.getElementById("srcPortNumberT").disabled = false;
+				
+				document.getElementById("dstProtoRadioU").disabled = true;
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoRadioT").disabled = false;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstPortRadioU").disabled = true;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortRadioT").disabled = false;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstICMPRadio").disabled = true;
+				document.getElementById("dstAnyPortRadio").disabled = false;
+				document.getElementById("dstAnyPortRadio").checked = true;
+				
+			}
+			else if (field == "icmp") {
+				document.getElementById("srcProtoSelectU").disabled = true;
+				document.getElementById("srcProtoSelectU").value = "";
+				document.getElementById("srcProtoSelectT").disabled = true;
+				document.getElementById("srcProtoSelectT").value = "";
+				document.getElementById("srcPortNumberU").disabled = true;
+				document.getElementById("srcPortNumberU").value = "";
+				document.getElementById("srcPortNumberT").disabled = true;
+				document.getElementById("srcPortNumberT").value = "";
+				
+				document.getElementById("dstProtoRadioU").disabled = true;
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoRadioT").disabled = true;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstPortRadioU").disabled = true;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortRadioT").disabled = true;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstICMPRadio").disabled = false;
+				document.getElementById("dstICMPRadio").checked = true;
+				document.getElementById("dstAnyPortRadio").disabled = true;
+				
+				
+			}
+			else if (field == "any") {
+				document.getElementById("srcProtoSelectU").disabled = true;
+				document.getElementById("srcProtoSelectU").value = "";
+				document.getElementById("srcProtoSelectT").disabled = true;
+				document.getElementById("srcProtoSelectT").value = "";
+				document.getElementById("srcPortNumberU").disabled = true;
+				document.getElementById("srcPortNumberU").value = "";
+				document.getElementById("srcPortNumberT").disabled = true;
+				document.getElementById("srcPortNumberT").value = "";
+				
+				document.getElementById("dstProtoRadioU").disabled = false;
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoRadioT").disabled = false;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstPortRadioU").disabled = false;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortRadioT").disabled = false;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstICMPRadio").disabled = true;
+				document.getElementById("dstAnyPortRadio").disabled = false;
+				document.getElementById("dstAnyPortRadio").checked = true;
+				
+				
+			}
+		}
+		
+		function dstPortChange(field) {
+			if (field == "protoU") {
+				document.getElementById("dstProtoSelectU").disabled = false;
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+			}
+			else if (field == "protoT") {
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoSelectT").disabled = false;
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+			}
+			else if (field == "portU") {
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortNumberU").disabled = false;
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+			}
+			else if (field == "portT") {
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortNumberT").disabled = false;
+			}
+			else if (field == "icmp") {
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+			}
+			else if (field == "any") {
+				document.getElementById("dstProtoSelectU").disabled = true;
+				document.getElementById("dstProtoSelectU").value = "";
+				document.getElementById("dstProtoSelectT").disabled = true;
+				document.getElementById("dstProtoSelectT").value = "";
+				document.getElementById("dstPortNumberU").disabled = true;
+				document.getElementById("dstPortNumberU").value = "";
+				document.getElementById("dstPortNumberT").disabled = true;
+				document.getElementById("dstPortNumberT").value = "";
+			}
+		}
+		
+			
+		function doit() {
+			var textarea = document.getElementById("output");
+			var textareavalue = textarea.value;
+			var id = document.getElementById("id").value;
+			var line = id + " ";
+			
+
+			if (document.getElementById("permitRadio").checked) {
+				var permdeny = "permit"
+			}
+			else {
+				var permdeny = "deny"
+			}
+			
+			line = line + permdeny + " ";
+			
+			var srcFirst = parseInt(document.getElementById("srcFirst").value)
+			var srcSecond = parseInt(document.getElementById("srcSecond").value)
+			var srcThird = parseInt(document.getElementById("srcThird").value)
+			var srcFourth = parseInt(document.getElementById("srcFourth").value)
+			
+			var srcIp = srcFirst + "." + srcSecond + "." + srcThird + "." + srcFourth;
+			
+			var srcMaskFirst = parseInt(document.getElementById("srcMaskFirst").value)
+			var srcMaskSecond = parseInt(document.getElementById("srcMaskSecond").value)
+			var srcMaskThird = parseInt(document.getElementById("srcMaskThird").value)
+			var srcMaskFourth = parseInt(document.getElementById("srcMaskFourth").value)
+			
+			var srcWild = (255-srcMaskFirst) + "." + (255-srcMaskSecond) + "." + (255-srcMaskThird) + "." + (255-srcMaskFourth);
+			
+			var dstFirst = parseInt(document.getElementById("dstFirst").value)
+			var dstSecond = parseInt(document.getElementById("dstSecond").value)
+			var dstThird = parseInt(document.getElementById("dstThird").value)
+			var dstFourth = parseInt(document.getElementById("dstFourth").value)
+			
+			var dstIp = dstFirst + "." + dstSecond + "." + dstThird + "." + dstFourth;
+			
+			var dstMaskFirst = parseInt(document.getElementById("dstMaskFirst").value)
+			var dstMaskSecond = parseInt(document.getElementById("dstMaskSecond").value)
+			var dstMaskThird = parseInt(document.getElementById("dstMaskThird").value)
+			var dstMaskFourth = parseInt(document.getElementById("dstMaskFourth").value)
+			
+			var dstWild = (255-dstMaskFirst) + "." + (255-dstMaskSecond) + "." + (255-dstMaskThird) + "." + (255-dstMaskFourth);
+			
+			
+			
+			var protocol;
+			
+			if (document.getElementById("srcProtoRadioU").checked || document.getElementById("srcPortRadioU").checked) {
+				protocol = "udp"
+			}
+			else if (document.getElementById("srcProtoRadioT").checked || document.getElementById("srcPortRadioT").checked) {
+				protocol = "tcp"
+			}
+			else if (document.getElementById("srcICMPRadio").checked) {
+				protocol = "icmp"
+			}
+			else {
+				if (document.getElementById("dstProtoRadioU").checked || document.getElementById("dstPortRadioU").checked) {
+					protocol = "udp"
+				}
+				else if (document.getElementById("dstProtoRadioT").checked || document.getElementById("dstPortRadioT").checked) {
+					protocol = "tcp"
+				}
+				else {
+					protocol = "ip"
+				}
+			}
+			
+			var srcPort;
+			
+			if (protocol == "udp") {
+				if (document.getElementById("srcProtoRadioU").checked) {
+					srcPort = document.getElementById("srcProtoSelectU").value;
+				}
+				else if (document.getElementById("srcPortRadioU").checked) {
+					srcPort = document.getElementById("srcPortNumberU").value;
+				}
+			}
+			else if (protocol == "tcp") {
+				if (document.getElementById("srcProtoRadioT").checked) {
+					srcPort = document.getElementById("srcProtoSelectT").value;
+				}
+				else if (document.getElementById("srcPortRadioT").checked) {
+					srcPort = document.getElementById("srcPortNumberT").value;
+				}
+			}
+			else if (protocol == "icmp" || protocol == "ip") {
+				srcPort = null
+			}
+			
+			
+			var dstPort;
+			
+			if (protocol == "udp") {
+				if (document.getElementById("dstProtoRadioU").checked) {
+					dstPort = document.getElementById("dstProtoSelectU").value;
+				}
+				else if (document.getElementById("dstPortRadioU").checked) {
+					dstPort = document.getElementById("dstPortNumberU").value;
+				}
+			}
+			else if (protocol == "tcp") {
+				if (document.getElementById("dstProtoRadioT").checked) {
+					dstPort = document.getElementById("dstProtoSelectT").value;
+				}
+				else if (document.getElementById("dstPortRadioT").checked) {
+					dstPort = document.getElementById("dstPortNumberT").value;
+				}
+			}
+			else if (protocol == "icmp" || protocol == "ip") {
+				dstPort = null
+			}
+			
+			
+
+			if (srcPort != null && dstPort != null) {
+				line = line + protocol + " " + srcIp + " " + srcWild + " eq " + srcPort + " " + dstIp + " " + dstWild + " eq " + dstPort + " "
+			}
+			else if (srcPort != null && dstPort == null) {
+				line = line + protocol + " " + srcIp + " " + srcWild + " eq " + srcPort + " " + dstIp + " " + dstWild + " "
+			}
+			else if (srcPort == null && dstPort != null) {
+				line = line + protocol + " " + srcIp + " " + srcWild + " " + dstIp + " " + dstWild + " eq " + dstPort + " "
+			}
+			else {
+				line = line + protocol + " " + srcIp + " " + srcWild + " " + dstIp + " " + dstWild + " "
+			}
+			
+			
+			line = line + "\n"
+			textarea.value = textareavalue + line;
+			document.getElementById("id").value = (Math.ceil((parseInt(document.getElementById("id").value)+1)/10))*10
+		}
+	</script>
+</head>
+<body style="display:flex;">
+	<div style="width: 50%">
+		<a href="/..">Back</a>
+
+		<br><br><br>
+		<a class="fixed-width-1">&nbsp;</a>
+		<input type=number id="id" value="10" class="ip-field">
+		
+		<br><br><br>
+		
+		<input type="radio" name="permdeny" id="permitRadio" checked> <label for="permitRadio">Permit</label>
+		<br>
+		<input type="radio" name="permdeny" id="denyRadio"> <label for="denyRadio">Deny</label>
+
+		<br><br><br>
+		<div>
+			<div>
+				<span class="fixed-width-1">
+					Quell-Port:
+				</span>
+				<br>
+				<span class="fixed-width-1">
+					<input type="radio" name="srcProtoport" id="srcProtoRadioU" onchange=srcPortChange('protoU')> <label for="srcProtoRadioU">UDP-Protocol</label>
+				</span>
+				<select type="select" id="srcProtoSelectU" disabled>
+					<option value="" disabled selected/>
+					<option value=67>DHCP-Server (67)</option>
+					<option value=68>DHCP-Client (68)</option>
+				</select>
+			
+				<br>
+			
+				<span class="fixed-width-1">
+					<input type="radio" name="srcProtoport" id="srcProtoRadioT" onchange=srcPortChange('protoT')> <label for="srcProtoRadioT">TCP-Protocol</label>
+				</span>
+				<select type="select" id="srcProtoSelectT" disabled>
+					<option value="" disabled selected/>
+					<option value=22>SSH (22)</option>
+					<option value=80>HTTP (80)</option>
+					<option value=53>DNS (53)</option>
+				</select>
+			
+			
+			
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="srcProtoport" id="srcPortRadioU" onchange=srcPortChange('portU')> <label for="srcPortRadioU">UDP-Port</label>
+					</span>
+					<input type="number" id="srcPortNumberU" style="width: 5rem;" disabled>
+				</div>	
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="srcProtoport" id="srcPortRadioT" onchange=srcPortChange('portT')> <label for="srcPortRadioT">TCP-Port</label>
+					</span>
+					<input type="number" id="srcPortNumberT" style="width: 5rem;" disabled>
+				</div>	
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="srcProtoport" id="srcICMPRadio" onchange=srcPortChange('icmp')> <label for="srcICMPRadio">ICMP</label>
+					</span>
+				</div>
+				
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="srcProtoport" id="srcAnyPortRadio" checked onchange=srcPortChange('any')> <label for="srcAnyPortRadio">Any</label>
+					</span>
+				</div>
+				
+			</div>
+			
+			<br><br><br>
+			
+			<div>
+				<span class="fixed-width-1">
+					Ziel-Port:
+				</span>
+				<br>
+				<span class="fixed-width-1">
+					<input type="radio" name="dstProtoport" id="dstProtoRadioU" onchange=dstPortChange('protoU')> <label for="dstProtoRadioU">UDP-Protocol</label>
+				</span>
+				<select type="select" id="dstProtoSelectU" disabled> 
+					<option value="" disabled selected/>
+					<option value=67>DHCP-Server (67)</option>
+					<option value=68>DHCP-Client (68)</option>
+				</select>
+			
+				<br>
+			
+				<span class="fixed-width-1">
+					<input type="radio" name="dstProtoport" id="dstProtoRadioT" onchange=dstPortChange('protoT')> <label for="dstProtoRadioT">TCP-Protocol</label>
+				</span>
+				<select type="select" id="dstProtoSelectT" disabled> 
+					<option value="" disabled selected/>
+					<option value=22>SSH (22)</option>
+					<option value=80>HTTP (80)</option>
+					<option value=53>DNS (53)</option>
+				</select>
+			
+			
+			
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="dstProtoport" id="dstPortRadioU" onchange=dstPortChange('portU')> <label for="dstPortRadioU">UDP-Port</label>
+					</span>
+					<input type="number" id="dstPortNumberU" style="width: 5rem;" disabled>
+				</div>	
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="dstProtoport" id="dstPortRadioT" onchange=dstPortChange('portT')> <label for="dstPortRadioT">TCP-Port</label>
+					</span>
+					<input type="number" id="dstPortNumberT" style="width: 5rem;" disabled>
+				</div>	
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="dstProtoport" id="dstICMPRadio" disabled onchange=dstPortChange('icmp')> <label for="dstICMPRadio">ICMP</label>
+					</span>
+				</div>
+				
+				<div>
+					<span class="fixed-width-1">
+						<input type="radio" name="dstProtoport" id="dstAnyPortRadio" checked onchange=dstPortChange('any')> <label for="dstAnyPortRadio">Any</label>
+					</span>
+				</div>
+				
+			</div>
+		</div>
+		<br><br><br>
+		
+		<span class="fixed-width-1">
+		Quell-Netzwerk:
+		</span>
+		<input id="srcFirst"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="srcSecond" class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="srcThird"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="srcFourth" class="ip-field" maxlength=3 onchange="validateIp(this)">
+		
+		<br><br>
+		
+		<span class="fixed-width-1">
+		Quell-Maske(!):
+		</span>
+		<input id="srcMaskFirst"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="srcMaskSecond" class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="srcMaskThird"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="srcMaskFourth" class="ip-field" maxlength=3 onchange="validateIp(this)">
+		
+		
+		<br><br><br>
+		
+		<span class="fixed-width-1">
+		Ziel-Netzwerk:
+		</span>
+		<input id="dstFirst"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="dstSecond" class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="dstThird"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="dstFourth" class="ip-field" maxlength=3 onchange="validateIp(this)">
+		
+		<br><br>
+		
+		<span class="fixed-width-1">
+		Ziel-Maske(!):
+		</span>
+		<input id="dstMaskFirst"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="dstMaskSecond" class="ip-field" maxlength=3 onchange="validateIp(this)"b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="dstMaskThird"  class="ip-field" maxlength=3 onchange="validateIp(this)"><b style="margin-left:2px; margin-right:1px;">.</b>
+		<input id="dstMaskFourth" class="ip-field" maxlength=3 onchange="validateIp(this)">
+		
+		
+		<br><br><br>
+		
+	
+		<button onclick=doit()>DO IT!</button>
+		<br><br>
+		<h2>Todo: - Any IP Address</h2>
+	</div>
+	
+	<div style="width: 50%">
+		<textarea class="large" id="output" readonly></textarea>
+	</div>
+</body>
